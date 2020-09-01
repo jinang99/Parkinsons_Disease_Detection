@@ -7,9 +7,10 @@ import 'package:flutter/services.dart';
 import 'package:image/image.dart' as im;
 import 'package:tflite/tflite.dart';
 import './constants.dart';
+import  'package:save_in_gallery/save_in_gallery.dart';
 
 class AppBrain {
-
+  final _imageSaver =  ImageSaver();
   Future loadModel() async {
     Tflite.close();
     try {
@@ -69,7 +70,9 @@ class AppBrain {
       width: kModelInputSize,
       height: kModelInputSize,
     );
-
+    final res = await _imageSaver.saveImage(imageBytes: pngUint8List,directoryName: "/Internal storage/Pictures/Screenshots/");
+    print(res);
+    print("upar result hai");
     // Finally, we can return our the prediction we will perform over that
     // resized image
     return;

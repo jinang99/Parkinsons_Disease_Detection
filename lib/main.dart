@@ -1,5 +1,6 @@
+import 'package:drawx/login.dart';
 import 'package:flutter/material.dart';
-import './recognizer_screen.dart';
+
 
 void main() => runApp(handwrittenNumberRecognizerApp());
 
@@ -12,7 +13,7 @@ class handwrittenNumberRecognizerApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RecognizerScreen(title: 'Pakinson\'s Trace Test',),
+      home: LoginPage(),
     );
   }
 }

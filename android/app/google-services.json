@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "492691090263",
+    "firebase_url": "https://tajani-d377c.firebaseio.com",
+    "project_id": "tajani-d377c",
+    "storage_bucket": "tajani-d377c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492691090263:android:39f9081328e13281b76c12",
+        "android_client_info": {
+          "package_name": "com.example.drawx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492691090263-4gq72n3bg9mjret9flqtgjd5k22th1b2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl_-WAAh0s8lsHZki5PwfgLtWN6se9q_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492691090263-4gq72n3bg9mjret9flqtgjd5k22th1b2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

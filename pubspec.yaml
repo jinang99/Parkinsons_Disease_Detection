@@ -25,6 +25,11 @@ dependencies:
   cupertino_icons: ^0.1.2
   tflite: ^1.0.4
   image:
+  save_in_gallery:
+  screenshot:
+  image_gallery_saver:
+  font_awesome_flutter:
+  firebase_database: 
 
 dev_dependencies:
   flutter_test:
@@ -43,6 +48,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/spiral.png
+    - assets/images/spiral2.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
