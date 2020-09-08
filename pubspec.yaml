@@ -30,6 +30,8 @@ dependencies:
   image_gallery_saver:
   font_awesome_flutter:
   firebase_database: 
+  http:
+  async:
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +51,7 @@ flutter:
   assets:
     - assets/images/spiral.png
     - assets/images/spiral2.jpg
+    - assets/images/meander.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg

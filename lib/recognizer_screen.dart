@@ -6,6 +6,9 @@ import './constants.dart';
 import './drawing_painter.dart';
 import './brain.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:http/http.dart' as http;
+import 'package:async/async.dart';
+
 
 class RecognizerScreen extends StatefulWidget {
   RecognizerScreen({Key key, this.title}) : super(key: key);
@@ -88,8 +91,35 @@ class _RecognizerScreen extends State<RecognizerScreen> {
                       setState(() {
                         _imageFile = image;
                       });
+                      //http://25ab84feb44c.ngrok.io/preds
+                      print(image);
+                      var stream = new http.ByteStream(DelegatingStream.typed(image.openRead()));
+                      var length = await image.length();
+                      print(length);
+                      var uri = Uri.parse("http://1182a12f1022.ngrok.io/preds");
+
+                      print("connection established.");
+                      // var request = http.MultipartRequest('POST', uri);
+                      //     request.files.add(
+                      //       await http.MultipartFile.fromPath(
+                      //         'picture',
+                      //         "/Internal storage/Pictures/Screenshots/1598347408.png"
+                      //       )
+                      //     );
+                      var request = new http.MultipartRequest("POST", uri);
+                      var multipartFile = new http.MultipartFile( 'image', stream, length,
+                      filename: "image", 
+                      );
+                      //contentType: MediaType(‘image’, ‘png’));
+                      request.files.add(multipartFile);
+
+                      var response = await request.send();
+                      print(response.statusCode);
+                      final x = await response.stream.bytesToString();
+                            print("Response :  $x");
                       final result =
                             await ImageGallerySaver.saveImage(image.readAsBytesSync());
+                          print(result);
                         print("File Saved to Gallery");
                       }).catchError((onError) {
                         print(onError);
@@ -104,7 +134,7 @@ class _RecognizerScreen extends State<RecognizerScreen> {
                         Container(
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage('./assets/images/spiral2.jpg'),
+                              image: AssetImage('./assets/images/meander.jpg'),
                               fit: BoxFit.cover,
                             ),
                           ),
