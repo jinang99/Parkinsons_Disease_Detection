@@ -32,6 +32,10 @@ dependencies:
   firebase_database: 
   http:
   async:
+  
+  flutter_audio_recorder: 
+  path_provider:
+  audioplayers:
 
 dev_dependencies:
   flutter_test:
