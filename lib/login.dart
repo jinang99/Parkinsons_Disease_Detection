@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 import 'package:drawx/recognizer_screen.dart';
+import 'package:drawx/select.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as prefix0;
 import 'package:flutter/services.dart';
@@ -450,7 +451,10 @@ class _LoginPageState extends State<LoginPage>
                         print(input_pass);
                         if (pass == input_pass) {
                          
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RecognizerScreen(title: 'Pakinson\'s Trace Test',)));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                            //RecognizerScreen(title: 'Pakinson\'s Trace Test',);
+                            return Select();
+                            }));
                               
                                   
                         }

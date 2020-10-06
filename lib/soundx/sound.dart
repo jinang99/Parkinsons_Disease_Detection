@@ -153,13 +153,13 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _recording = result;
     });
-    var uri = Uri.parse("http://96817f037825.ngrok.io/preds");
+    var uri = Uri.parse("http://9ba96a819dff.ngrok.io/sound");
 
     print("connection established.");
     var request = http.MultipartRequest('POST', uri);
   request.files.add(
     await http.MultipartFile.fromPath(
-      'picture',
+      'sound',
       customPath
     )
       );

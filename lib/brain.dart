@@ -5,23 +5,23 @@ import 'dart:typed_data';
 import 'dart:ui' hide Image;
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as im;
-import 'package:tflite/tflite.dart';
+
 import './constants.dart';
 import  'package:save_in_gallery/save_in_gallery.dart';
 
 class AppBrain {
   final _imageSaver =  ImageSaver();
-  Future loadModel() async {
-    Tflite.close();
-    try {
-      await Tflite.loadModel(
-        model: "assets/converted_mnist_model.tflite",
-        labels: "assets/labels.txt",
-      );
-    } on PlatformException {
-      print('Failed to load model.');
-    }
-  }
+  // Future loadModel() async {
+  //   // Tflite.close();
+  //   // try {
+  //   //   await Tflite.loadModel(
+  //   //     model: "assets/converted_mnist_model.tflite",
+  //   //     labels: "assets/labels.txt",
+  //   //   );
+  //   // } on PlatformException {
+  //   //   print('Failed to load model.');
+  //   // }
+  // }
 
   void processCanvasPoints(List<Offset> points) async {
 
@@ -79,11 +79,11 @@ class AppBrain {
 //    return predictImage(resizedImage);
   }
 
-  Future<List> predictImage(im.Image image) async {
-    return await Tflite.runModelOnBinary(
-      binary: imageToByteListFloat32(image, kModelInputSize),
-    );
-  }
+  // Future<List> predictImage(im.Image image) async {
+  //   return await Tflite.runModelOnBinary(
+  //     binary: imageToByteListFloat32(image, kModelInputSize),
+  //   );
+  // }
 
   Uint8List imageToByteListFloat32(im.Image image, int inputSize) {
     var convertedBytes = Float32List(inputSize * inputSize);
