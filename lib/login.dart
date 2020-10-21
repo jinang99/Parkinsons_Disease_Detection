@@ -102,14 +102,15 @@ class _LoginPageState extends State<LoginPage>
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      // Padding(
-                      //   padding: EdgeInsets.only(top: 50.0),
-                      //   child: new Image(
-                      //       width: 100.0,
-                      //       height: 100.0,
-                      //       fit: BoxFit.fill,
-                      //       image: new AssetImage('assets/img/logo2.png')),
-                      // ),
+                      SizedBox(height: 60,),
+                      Padding(
+                        padding: EdgeInsets.only(top: 50.0),
+                        child: new Image(
+                            width: 190.0,
+                            height: 75.0,
+                            fit: BoxFit.fill,
+                            image: new AssetImage('assets/images/logo.jpg')),
+                      ),
                       Padding(
                         padding: EdgeInsets.only(top: 0.0),
                         child: FlatButton(

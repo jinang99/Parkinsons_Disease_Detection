@@ -59,6 +59,7 @@ flutter:
     - assets/images/spiral.png
     - assets/images/spiral2.jpg
     - assets/images/meander.jpg
+    - assets/images/logo.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg

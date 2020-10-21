@@ -9,6 +9,7 @@ import './brain.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:http/http.dart' as http;
 import 'package:async/async.dart';
+import './style/theme.dart' as Theme;
 
 
 class RecognizerScreen extends StatefulWidget {
@@ -44,9 +45,27 @@ class _RecognizerScreen extends State<RecognizerScreen> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Container(
-        child: Column(
+      body: 
+      Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Theme.Colors.loginGradientStart,
+              Theme.Colors.loginGradientEnd
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter
+          )
+        ),
+        child:
+      Container(
+        child: 
+        Center(
+          child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             // Expanded(
             //   flex: 1,
@@ -85,50 +104,7 @@ class _RecognizerScreen extends State<RecognizerScreen> {
                     },
                     onPanEnd: (details) async {
                       points.add(null);
-                      // screenshotController
-                      //   .capture(delay: Duration(milliseconds: 10))
-                      //   .then((File image) async {
-                      // //print("Capture Done");
-                      // setState(() {
-                      //   _imageFile = image;
-                      // });
-                      // //http://25ab84feb44c.ngrok.io/preds
-                      // print(image);
-                      // var stream = new http.ByteStream(DelegatingStream.typed(image.openRead()));
-                      // var length = await image.length();
-                      // print(length);
-                      // var uri = Uri.parse("http://e17b47a42f0f.ngrok.io/preds");
-
-                      // print("connection established.");
-                      // // var request = http.MultipartRequest('POST', uri);
-                      // //     request.files.add(
-                      // //       await http.MultipartFile.fromPath(
-                      // //         'picture',
-                      // //         "/Internal storage/Pictures/Screenshots/1598347408.png"
-                      // //       )
-                      // //     );
-                      // var request = new http.MultipartRequest("POST", uri);
-                      // var multipartFile = new http.MultipartFile( 'image', stream, length,
-                      // filename: "image", 
-                      // );
-                      // //contentType: MediaType(‘image’, ‘png’));
-                      // request.files.add(multipartFile);
-
-                      // var response = await request.send();
-                      // print(response.statusCode);
-                      // final x = await response.stream.bytesToString();
-                      //       print("Response :  $x");
-                      // final result =
-                      //       await ImageGallerySaver.saveImage(image.readAsBytesSync());
-                      //     print(result);
-                      //   print("File Saved to Gallery");
-                      // }).catchError((onError) {
-                      //   print(onError);
-                      // });
-                      //brain.processCanvasPoints(points);
-//                      List predictions = await brain.processCanvasPoints(points);
-//                      print(predictions);
-//                      setState(() {});
+                      
                     },
                     child: ClipRect(
                         child:
@@ -154,6 +130,7 @@ class _RecognizerScreen extends State<RecognizerScreen> {
             ),
             ),
             RaisedButton(
+              color: Colors.lightBlue[300],
               child: Text("Upload"),
               onPressed: () {
                 screenshotController
@@ -185,17 +162,17 @@ class _RecognizerScreen extends State<RecognizerScreen> {
                       //contentType: MediaType(‘image’, ‘png’));
                       request.files.add(multipartFile);
 
-                      var response = await request.send();
-                      print(response.statusCode);
-                      final x = await response.stream.bytesToString();
-                            print("Response :  $x");
+                      // var response = await request.send();
+                      // print(response.statusCode);
+                      // final x = await response.stream.bytesToString();
+                      //       print("Response :  $x");
                       final result =
                             await ImageGallerySaver.saveImage(image.readAsBytesSync());
                           print(result);
                         print("File Saved to Gallery");
                         
                         //Next test
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Sound(x)));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Sound({"Control": "0.005985"}.toString())));
                       }).catchError((onError) {
                         print(onError);
                       }
@@ -217,8 +194,11 @@ class _RecognizerScreen extends State<RecognizerScreen> {
             //       ),
           ],
         ),
-      ),
+        )
+        
+      ),),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.lightBlue[400],
         onPressed: () {
           _cleanDrawing();
         },

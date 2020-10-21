@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:async/async.dart';
-
+import './style/theme.dart' as Theme;
 class PhotoPreviewScreen extends StatefulWidget {
   @override
   _PhotoPreviewScreenState createState() => _PhotoPreviewScreenState();
@@ -18,16 +18,35 @@ class _PhotoPreviewScreenState extends State<PhotoPreviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: 
+      Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Theme.Colors.loginGradientStart,
+              Theme.Colors.loginGradientEnd
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter
+          )
+        ),
+      child:
+      
+      Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             _setImageView(),
             (imageFile == null) ? Container(
               
               child: Text("Upload image"))
             :
-            RaisedButton(
+            SizedBox(child: RaisedButton( 
+              
+              color: Colors.lightBlue[300],
               child: Text("Upload"),
               onPressed: () async {
                       //print("Capture Done");
@@ -54,16 +73,18 @@ class _PhotoPreviewScreenState extends State<PhotoPreviewScreen> {
                       //contentType: MediaType(‘image’, ‘png’));
                       request.files.add(multipartFile);
 
-                      var response = await request.send();
-                      print(response.statusCode);
-                      final x = await response.stream.bytesToString();
-                            print("Response :  $x");
+                      // var response = await request.send();
+                      // print(response.statusCode);
+                      // final x = await response.stream.bytesToString();
+                      //       print("Response :  $x");
                       
                         
                         
                         //Next test
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Sound(x)));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Sound({'Control': '0.5666'}.toString())));
                       }),
+            width: double.infinity,)
+            
                       
                     
 
@@ -72,8 +93,10 @@ class _PhotoPreviewScreenState extends State<PhotoPreviewScreen> {
         
           ],
         ),
-      ),
+      )),
       floatingActionButton: FloatingActionButton(
+
+        backgroundColor: Colors.lightBlue[400] ,
         onPressed: () {
           _showSelectionDialog(context);
         },

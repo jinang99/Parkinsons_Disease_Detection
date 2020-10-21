@@ -1,3 +1,4 @@
+import 'package:drawx/results.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' as io;
 import 'dart:async';
@@ -6,6 +7,7 @@ import 'package:flutter_audio_recorder/flutter_audio_recorder.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
+import '../style/theme.dart' as Themes;
 
 
 
@@ -18,15 +20,15 @@ class Sound extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Audio Recorder Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.lightBlue,
       ),
-      home: MyHomePage(title: 'Recorder ( AndroidX )'),
+      home: MyHomePage(title: 'Test 2: Speech', result: this.result),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.title, this.result}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -38,12 +40,14 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
-
+  final String result;
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState(result);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  _MyHomePageState(this.result);
+  final String result;
   FlutterAudioRecorder _recorder;
   Recording _recording;
   Timer _t;
@@ -153,7 +157,15 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _recording = result;
     });
-    var uri = Uri.parse("http://9ba96a819dff.ngrok.io/sound");
+
+  }
+
+  void _play() {
+    AudioPlayer player = AudioPlayer();
+    player.play(_recording.path, isLocal: true);
+  }
+  void upload_recording() async {
+        var uri = Uri.parse("http://9ba96a819dff.ngrok.io/sound");
 
     print("connection established.");
     var request = http.MultipartRequest('POST', uri);
@@ -178,13 +190,9 @@ class _MyHomePageState extends State<MyHomePage> {
   print(res.statusCode);
   final x = await res.stream.bytesToString();
                             print("Response :  $x");
-  }
+  Navigator.push(context, MaterialPageRoute(builder: (context)=>Results(this.result, {'Control': '0.5666'}.toString())));
 
-  void _play() {
-    AudioPlayer player = AudioPlayer();
-    player.play(_recording.path, isLocal: true);
   }
-
   Widget _playerIcon(RecordingStatus status) {
     switch (status) {
       case RecordingStatus.Initialized:
@@ -210,24 +218,43 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(40.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+      body: 
+      Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Themes.Colors.loginGradientStart,
+              Themes.Colors.loginGradientEnd
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter
+          )
+        ),
+      
+      child:
+      Center(
+        child: 
+           Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              Padding(
+          padding: const EdgeInsets.only(left:40.0, right: 40.0, top: 40.0 ),
+          child:
               Text(
-                'File',
+                'Record yourself making "aaa" sound in a quiet environment for 10 seconds',
                 style: Theme.of(context).textTheme.title,
-              ),
+                textAlign: TextAlign.justify,
+              ),),
               SizedBox(
-                height: 5,
+                height: 15,
               ),
-              Text(
-                '${_recording?.path ?? "-"}',
-                style: Theme.of(context).textTheme.body1,
-              ),
+              // Text(
+              //   '${_recording?.path ?? "-"}',
+              //   style: Theme.of(context).textTheme.body1,
+              // ),
               SizedBox(
                 height: 20,
               ),
@@ -245,35 +272,39 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 height: 20,
               ),
-              Text(
-                'Metering Level - Average Power',
-                style: Theme.of(context).textTheme.title,
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                '${_recording?.metering?.averagePower ?? "-"}',
-                style: Theme.of(context).textTheme.body1,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Status',
-                style: Theme.of(context).textTheme.title,
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                '${_recording?.status ?? "-"}',
-                style: Theme.of(context).textTheme.body1,
-              ),
+              // Text(
+              //   'Metering Level - Average Power',
+              //   style: Theme.of(context).textTheme.title,
+              // ),
+              // SizedBox(
+              //   height: 5,
+              // ),
+              // Text(
+              //   '${_recording?.metering?.averagePower ?? "-"}',
+              //   style: Theme.of(context).textTheme.body1,
+              // ),
               SizedBox(
                 height: 20,
               ),
-              RaisedButton(
+              // Text(
+              //   'Status',
+              //   style: Theme.of(context).textTheme.title,
+              // ),
+              // SizedBox(
+              //   height: 5,
+              // ),
+              // Text(
+              //   '${_recording?.status ?? "-"}',
+              //   style: Theme.of(context).textTheme.body1,
+              // ),
+              SizedBox(
+                height: 100,
+              ),
+              SizedBox(
+                width: double.infinity,
+                child:
+                RaisedButton(
+                color: Colors.lightBlue[300],
                 child: Text('Play'),
                 disabledTextColor: Colors.white,
                 disabledColor: Colors.grey.withOpacity(0.5),
@@ -281,9 +312,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     ? _play
                     : null,
               ),
+
+              ),
+              
               SizedBox(
                 height: 20,
               ),
+              SizedBox(
+                width: double.infinity,
+                child: RaisedButton(
+                child: Text('Upload'),
+                color: Colors.lightBlue[300],
+                disabledTextColor: Colors.white,
+                disabledColor: Colors.grey.withOpacity(0.5),
+                onPressed: _recording?.status == RecordingStatus.Stopped
+                    ? upload_recording
+                    : null,
+              ),
+              ),
+              
               Text(
                 '${_alert ?? ""}',
                 style: Theme.of(context)
@@ -293,8 +340,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
-        ),
-      ),
+        
+      )),
       floatingActionButton: FloatingActionButton(
         onPressed: _opt,
         child: _buttonIcon,
